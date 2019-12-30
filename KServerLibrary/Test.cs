@@ -23,9 +23,6 @@ namespace KServerLibrary
                 string clientData = System.Text.Encoding.ASCII.GetString(bytes);
                 string road = clientData.Split("\r\n")[0];
                 
-                
-                
-
                 string resp = "";
 
                 //resp += httpHeader200 + contentHTML + contentLength + "5" + endAnswer + "qwert" + endAnswer;
@@ -36,7 +33,7 @@ namespace KServerLibrary
                 if (Controller.roadMap.ContainsKey(road))
                 {
                     Console.WriteLine("ENTERED ROAD");
-                    resp = Controller.roadMap[road].answer();
+                    resp = Controller.roadMap[road].answer(clientData);
                 }
                 else
                 {

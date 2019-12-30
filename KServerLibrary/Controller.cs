@@ -9,11 +9,6 @@ namespace KServerLibrary
     {
         
         List<TcpClient> clients = new List<TcpClient>();
-        
-        
-        
-        
-
 
         public static Dictionary<string,KClient> roadMap = new Dictionary<string, KClient>();
         
@@ -30,6 +25,8 @@ namespace KServerLibrary
             
             listener.Start();
             
+            Console.WriteLine("server started on: "+ip+" and port "+port);
+            
             Test resper = new Test();
             
             
@@ -38,9 +35,8 @@ namespace KServerLibrary
                 TcpClient client = listener.AcceptTcpClient();
                 resper.Resp(client);
             }
-            
-            
         }
+
         
         
         
