@@ -4,7 +4,7 @@ using System.Net.Sockets;
 
 namespace KServerLibrary
 {
-    public class Test
+    public class KWorker
     {
         public void Resp(TcpClient client)
         {
