@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 
 namespace KServerLibrary
 {
@@ -32,12 +33,15 @@ namespace KServerLibrary
             
             action dl2 = delegate(KClient client) 
             { 
+                Console.WriteLine(client.RawText);
                 client.HTML("<h5>some txt</h5>" +
                             "<div> werui</div>" +
                             "<button>click</button>");
+                Console.WriteLine("ended test response create");
             };
             
             controller.Get("/test2",dl2);
+            
             
             
             
@@ -48,6 +52,28 @@ namespace KServerLibrary
             };
             
             controller.Get("/json",dl3);
+            
+            
+            
+            
+            action dlwait = delegate(KClient client)
+            {
+                client.HTML("waited some time");
+                Thread.Sleep(2000);
+                Console.WriteLine("has waited");
+            };
+            
+            controller.Get("/wait",dlwait);
+            
+            action postdel = delegate(KClient client)
+            {
+                client.PlainText("posted");
+            };
+            
+            controller.Post("/tpost",postdel);
+            
+            
+            
             
             
             

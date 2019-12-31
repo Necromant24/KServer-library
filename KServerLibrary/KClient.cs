@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http.Headers;
 using Newtonsoft.Json;
 
 namespace KServerLibrary
@@ -8,11 +9,12 @@ namespace KServerLibrary
     {
         private string response = "";
         private string rawText = "";
+        private string rawHeaders = "";
         
         string httpHeader200 = "HTTP/1.1 200 ok" + "\r\n";
         string contentHTML = "Content-Type: text/html"+"\r\n";
         string contentJson = "Content-Type: text/json"+"\r\n";
-        
+        string contentText = "Content-Type: text/plain"+"\r\n";
         
         
         string contentLength = "Content-Length: ";
@@ -27,11 +29,37 @@ namespace KServerLibrary
             set => response = value;
         }
 
+        public string RawText
+        {
+            get => rawText;
+            set => rawText = value;
+        }
+
+
+        public string RawHeaders()
+        {
+            return rawText.Split("\r\n\r\n")[0];
+        }
+
+        public void parseHeaders()
+        {
+            
+            
+        }
+
+        
+
+
 
         public void Json(object obj)
         {
             string json = JsonConvert.SerializeObject(obj);
             response = httpHeader200 + contentJson + contentLength + json.Length + endAnswer + json + endAnswer;
+        }
+
+        public void PlainText(string text)
+        {
+            response = httpHeader200 + contentText + contentLength + text.Length + endAnswer + text + endAnswer;
         }
         
 

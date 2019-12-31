@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace KServerLibrary
 {
@@ -11,7 +13,6 @@ namespace KServerLibrary
         Queue<TcpClient> clients = new Queue<TcpClient>();
         
         
-
         public static Dictionary<string,KClient> roadMap = new Dictionary<string, KClient>();
         
         public void Get(string road, Delegate del)
@@ -19,8 +20,17 @@ namespace KServerLibrary
             roadMap.Add("GET "+road+" HTTP/1.1",new KClient(del));
         }
 
+        //TODO: ДОДЕЛАТЬ И ПРОТЕСТИРОВАТЬ POST ЗАПРОСЫ
+        public void Post(string road, Delegate del)
+        {
+            roadMap.Add("POST "+road+" HTTP/1.1",new KClient(del));
+        }
+        
+        
+        
 
-        public void serve(string ip="0.0.0.0",int port=3000)
+
+        public async void serve(string ip="0.0.0.0",int port=3000)
         {
             IPAddress address = IPAddress.Parse(ip);
             TcpListener listener = new TcpListener(address,port);
@@ -28,19 +38,22 @@ namespace KServerLibrary
             listener.Start();
             
             Console.WriteLine("server started on: "+ip+" and port "+port);
-            
+            Console.WriteLine(Environment.ProcessorCount +" is processsors count");
+
+            ThreadPool.SetMinThreads(2, 2);
+            ThreadPool.SetMaxThreads(3, 3);
+
             KWorker resper = new KWorker();
-            
             
             while (true)
             {
-                TcpClient client = listener.AcceptTcpClient();
-                resper.Resp(client);
+                ThreadPool.QueueUserWorkItem(new WaitCallback(resper.Resp),listener.AcceptTcpClient());
             }
         }
 
         
         
+
         
         
     }

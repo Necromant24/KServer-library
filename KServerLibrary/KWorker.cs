@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Linq;
 using System.Net.Sockets;
+using System.Threading.Tasks;
 
 namespace KServerLibrary
 {
     public class KWorker
     {
-        public void Resp(TcpClient client)
+        public async void Resp(object obj)
         {
+            TcpClient client = (TcpClient) obj;
             string httpHeader200 = "HTTP/1.1 200 ok" + "\r\n";
             string contentHTML = "Content-Type: text/html"+"\r\n";
             string contentLength = "Content-Length: ";
@@ -23,13 +25,13 @@ namespace KServerLibrary
                 string clientData = System.Text.Encoding.ASCII.GetString(bytes);
                 string road = clientData.Split("\r\n")[0];
                 
+                Console.WriteLine("----------------------");
+                Console.WriteLine(clientData);
+                Console.WriteLine("----------------------");
+
+                
                 string resp = "";
 
-                //resp += httpHeader200 + contentHTML + contentLength + "5" + endAnswer + "qwert" + endAnswer;
-                
-//                KClient kClient = new KClient();
-//                kClient.HTML("<h1>some</h1>");
-//                resp = kClient.Response;
                 if (Controller.roadMap.ContainsKey(road))
                 {
                     Console.WriteLine("ENTERED ROAD");
@@ -43,7 +45,7 @@ namespace KServerLibrary
                 }
                 
                 byte[] byteResp = System.Text.Encoding.ASCII.GetBytes(resp);
-                    
+                
                 stream.Write(byteResp);
                 stream.Flush();
             }
