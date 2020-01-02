@@ -9,10 +9,7 @@ namespace KServerLibrary
 {
     public class Controller
     {
-        
-        Queue<TcpClient> clients = new Queue<TcpClient>();
-        
-        
+
         public static Dictionary<string,KClient> roadMap = new Dictionary<string, KClient>();
         
         
@@ -21,6 +18,12 @@ namespace KServerLibrary
         
         public void Get(string road, Delegate del)
         {
+            if (road.Contains("{"))
+            {
+                string varname = road.Split("{")[1].Split("}")[0];
+                road = road.Split("{")[0];
+            }
+            
             roadMap.Add(road,new KClient(del));
         }
         
@@ -35,7 +38,7 @@ namespace KServerLibrary
         //TODO: ДОДЕЛАТЬ И ПРОТЕСТИРОВАТЬ POST ЗАПРОСЫ
         public void Post(string road, Delegate del)
         {
-            roadMap.Add("POST "+road+" HTTP/1.1",new KClient(del));
+            roadMap.Add(road,new KClient(del));
         }
         
         

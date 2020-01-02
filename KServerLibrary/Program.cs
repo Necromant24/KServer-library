@@ -5,6 +5,8 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Sockets;
 using System.Threading;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace KServerLibrary
 {
@@ -74,16 +76,19 @@ namespace KServerLibrary
             
             action postdel = delegate(KClient client)
             {
+                Console.WriteLine("wertyu");
                 Console.WriteLine(client.GetHeader("Content-Type"));
+                JObject jobj = JObject.Parse(client.RawBody);
+                client.PlainText(jobj["tkey"].ToString());
                 
-                client.PlainText("posted");
+                
             };
             
             controller.Post("/tpost",postdel);
             
 
             Thread th = new Thread(test);
-            //th.Start();
+            th.Start();
             
             controller.serve();
             
