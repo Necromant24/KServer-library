@@ -12,6 +12,7 @@ namespace KServerLibrary
         private string rawText = "";
         private string rawHeaders = "";
         private string rawBody = "";
+        private string firstLine = "";
         
         
         // all client headers data structure
@@ -55,6 +56,7 @@ namespace KServerLibrary
             rawBody = data[1];
             string rawHeaders = data[0];
             string[] masHeaders = rawHeaders.Split("\r\n");
+            firstLine = masHeaders[0]; 
             for (int i = 1; i < masHeaders.Length; i++)
             {
                 string[] name_Header = masHeaders[i].Split(":");
@@ -83,7 +85,16 @@ namespace KServerLibrary
         }
 
 
-        
+        public void Json<Tkey, Tval>(Dictionary<Tkey, Tval> dict)
+        {
+            string json = JsonConvert.SerializeObject(dict, Formatting.Indented);
+            response = httpHeader200 + contentJson + contentLength + json.Length + endAnswer + json + endAnswer;
+        }
+
+        public string RequestRoad()
+        {
+            return firstLine.Split()[1];
+        }
 
 
         public void Json(object obj)

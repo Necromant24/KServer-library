@@ -45,7 +45,7 @@ namespace KServerLibrary
         
 
 
-        public async void serve(string ip="0.0.0.0",int port=3000)
+        public async void serve(string ip="0.0.0.0",int port=3000,int threads=3)
         {
             IPAddress address = IPAddress.Parse(ip);
             TcpListener listener = new TcpListener(address,port);
@@ -56,7 +56,7 @@ namespace KServerLibrary
             Console.WriteLine(Environment.ProcessorCount +" is processsors count");
 
             ThreadPool.SetMinThreads(2, 2);
-            ThreadPool.SetMaxThreads(3, 3);
+            ThreadPool.SetMaxThreads(threads, threads);
 
             KWorker resper = new KWorker();
             

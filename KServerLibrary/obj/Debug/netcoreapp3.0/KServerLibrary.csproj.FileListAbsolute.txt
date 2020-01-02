@@ -1,0 +1,13 @@
+C:\Users\асеr\RiderProjects\KServerLibrary\KServerLibrary\bin\Debug\netcoreapp3.0\KServerLibrary.exe
+C:\Users\асеr\RiderProjects\KServerLibrary\KServerLibrary\bin\Debug\netcoreapp3.0\KServerLibrary.deps.json
+C:\Users\асеr\RiderProjects\KServerLibrary\KServerLibrary\bin\Debug\netcoreapp3.0\KServerLibrary.runtimeconfig.json
+C:\Users\асеr\RiderProjects\KServerLibrary\KServerLibrary\bin\Debug\netcoreapp3.0\KServerLibrary.runtimeconfig.dev.json
+C:\Users\асеr\RiderProjects\KServerLibrary\KServerLibrary\bin\Debug\netcoreapp3.0\KServerLibrary.dll
+C:\Users\асеr\RiderProjects\KServerLibrary\KServerLibrary\bin\Debug\netcoreapp3.0\KServerLibrary.pdb
+C:\Users\асеr\RiderProjects\KServerLibrary\KServerLibrary\obj\Debug\netcoreapp3.0\KServerLibrary.csprojAssemblyReference.cache
+C:\Users\асеr\RiderProjects\KServerLibrary\KServerLibrary\obj\Debug\netcoreapp3.0\KServerLibrary.AssemblyInfoInputs.cache
+C:\Users\асеr\RiderProjects\KServerLibrary\KServerLibrary\obj\Debug\netcoreapp3.0\KServerLibrary.AssemblyInfo.cs
+C:\Users\асеr\RiderProjects\KServerLibrary\KServerLibrary\obj\Debug\netcoreapp3.0\KServerLibrary.dll
+C:\Users\асеr\RiderProjects\KServerLibrary\KServerLibrary\obj\Debug\netcoreapp3.0\KServerLibrary.pdb
+C:\Users\асеr\RiderProjects\KServerLibrary\KServerLibrary\bin\Debug\netcoreapp3.0\Newtonsoft.Json.dll
+C:\Users\асеr\RiderProjects\KServerLibrary\KServerLibrary\obj\Debug\netcoreapp3.0\KServerLibrary.csproj.CopyComplete

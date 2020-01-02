@@ -81,10 +81,19 @@ namespace KServerLibrary
                 JObject jobj = JObject.Parse(client.RawBody);
                 client.PlainText(jobj["tkey"].ToString());
                 
-                
             };
             
             controller.Post("/tpost",postdel);
+            
+            
+            controller.Get("/act",(action) delegate(KClient client)
+            {
+                Dictionary<string,string> dict = new Dictionary<string, string>();
+                dict["name"] = "poki";
+                dict["birth"] = "12.03.2002";
+                Console.WriteLine(client.RequestRoad());
+                client.Json(dict);
+            });
             
 
             Thread th = new Thread(test);
