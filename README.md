@@ -1,14 +1,14 @@
-#KServer library
+# KServer library
 
 Kesha's server library
 
-###Beta 1.0
+### Beta 1.0
 
-#####lightweight http server library
+##### lightweight http server library
 
 ----
 
-###Requirements:
+### Requirements:
 * [Newtonsoft JSON](https://github.com/JamesNK/Newtonsoft.Json)
 
 
