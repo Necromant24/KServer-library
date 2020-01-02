@@ -15,10 +15,22 @@ namespace KServerLibrary
         
         public static Dictionary<string,KClient> roadMap = new Dictionary<string, KClient>();
         
+        
+        
+        
+        
         public void Get(string road, Delegate del)
+        {
+            roadMap.Add(road,new KClient(del));
+        }
+        
+        
+        // old GET
+        public void Get2(string road, Delegate del)
         {
             roadMap.Add("GET "+road+" HTTP/1.1",new KClient(del));
         }
+        
 
         //TODO: ДОДЕЛАТЬ И ПРОТЕСТИРОВАТЬ POST ЗАПРОСЫ
         public void Post(string road, Delegate del)
@@ -47,7 +59,7 @@ namespace KServerLibrary
             
             while (true)
             {
-                ThreadPool.QueueUserWorkItem(new WaitCallback(resper.Resp),listener.AcceptTcpClient());
+                ThreadPool.QueueUserWorkItem(new WaitCallback(resper.Resp2),listener.AcceptTcpClient());
             }
         }
 

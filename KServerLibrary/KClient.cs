@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 
@@ -10,6 +11,11 @@ namespace KServerLibrary
         private string response = "";
         private string rawText = "";
         private string rawHeaders = "";
+        private string rawBody = "";
+        
+        
+        // all client headers data structure
+        Dictionary<string,string> clientHeaders = new Dictionary<string, string>();
         
         string httpHeader200 = "HTTP/1.1 200 ok" + "\r\n";
         string contentHTML = "Content-Type: text/html"+"\r\n";
@@ -34,21 +40,50 @@ namespace KServerLibrary
             get => rawText;
             set => rawText = value;
         }
+        
+        public string RawBody => rawBody;
+
+        public string GetHeader(string name)
+        {
+            return clientHeaders[name];
+        }
+        
+
+        private void parseRequest()
+        {
+            string[] data = rawText.Split("\r\n\r\n");
+            rawBody = data[1];
+            string rawHeaders = data[0];
+            string[] masHeaders = rawHeaders.Split("\r\n");
+            for (int i = 1; i < masHeaders.Length; i++)
+            {
+                string[] name_Header = masHeaders[i].Split(":");
+                clientHeaders[name_Header[0]] = name_Header[1].Trim();
+            }
+            
+        }
 
 
         public string RawHeaders()
         {
-            return rawText.Split("\r\n\r\n")[0];
+            string[] data = rawText.Split("\r\n\r\n");
+            rawBody = data[1];
+            return data[0];
         }
 
-        public void parseHeaders()
+        private void parseHeaders()
         {
-            
-            
+            string rawHeaders = RawHeaders();
+            string[] masHeaders = rawHeaders.Split("\r\n");
+            for (int i = 1; i < masHeaders.Length; i++)
+            {
+                string[] name_Header = masHeaders[i].Split(":");
+                clientHeaders[name_Header[0]] = name_Header[1].Trim();
+            }
         }
+
 
         
-
 
 
         public void Json(object obj)
@@ -73,16 +108,13 @@ namespace KServerLibrary
         {
             makeResponse = (action) del;
         }
-
-        public KClient()
-        {
-            
-        }
+        
 
 
         public string answer(string rawData)
         {
             rawText = rawData;
+            parseRequest();
             makeResponse(this);
             return response;
         }
